@@ -15,6 +15,7 @@ def test_run_reconstruction_generates_trial_artifacts_with_reference_song(tmp_pa
         analysis_json_path=analysis_path,
         reconstructed_root=tmp_path,
         reference_song_dir=reference_song_dir("neko_funjatta_test_piano_120"),
+        with_comparison=True,
     )
 
     assert result.render_path.exists()
@@ -46,6 +47,19 @@ def test_run_reconstruction_generates_trial_artifacts_without_reference_song(tmp
 
     assert result.render_path.exists()
     assert result.meta_path.exists()
+    assert result.comparison_path is None
+    assert result.comparison_mode == "disabled"
+
+
+def test_run_reconstruction_generates_optional_comparison_when_requested(tmp_path: Path) -> None:
+    analysis_path = ROOT / "intake" / "analysis" / "tmp_doremi_piano_120_4_4_20260419T045156Z_dbedf0d8.analysis.json"
+    result = run_reconstruction(
+        analysis_json_path=analysis_path,
+        reconstructed_root=tmp_path,
+        with_comparison=True,
+    )
+
+    assert result.comparison_path is not None
     assert result.comparison_path.exists()
     assert result.comparison_mode == "unavailable"
 

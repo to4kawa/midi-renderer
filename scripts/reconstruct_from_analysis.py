@@ -29,6 +29,11 @@ def parse_args() -> argparse.Namespace:
         "--song-intent-path",
         help="Optional path to song_intent YAML/JSON for intent-aware comparison.",
     )
+    parser.add_argument(
+        "--with-comparison",
+        action="store_true",
+        help="Generate optional comparison.md artifact.",
+    )
     return parser.parse_args()
 
 
@@ -67,6 +72,7 @@ def main() -> int:
             reconstructed_root=intake_reconstructed_dir(),
             reference_song_dir=inferred_reference,
             song_intent_path=song_intent_path,
+            with_comparison=args.with_comparison,
         )
     except (OSError, ValueError, RuntimeError) as exc:
         print(f"[reconstruct] error: {exc}")
@@ -81,7 +87,8 @@ def main() -> int:
         print(f"[reconstruct] song_intent: {song_intent_path}")
     print(f"[reconstruct] wrote: {result.render_path}")
     print(f"[reconstruct] wrote: {result.meta_path}")
-    print(f"[reconstruct] wrote: {result.comparison_path}")
+    if result.comparison_path is not None:
+        print(f"[reconstruct] wrote: {result.comparison_path}")
     return 0
 
 

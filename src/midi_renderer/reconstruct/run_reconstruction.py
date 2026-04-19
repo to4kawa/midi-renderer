@@ -49,11 +49,11 @@ class ReconstructionResult:
     output_dir: Path
     render_path: Path
     meta_path: Path
-    comparison_path: Path
+    comparison_path: Path | None
     comparison_mode: str
 
 
-def _build_render(analysis: dict[str, Any], song_ref: str) -> dict[str, Any]:
+def _build_render(analysis: dict[str, Any], song_ref: str, provisional_title: str) -> dict[str, Any]:
     if analysis.get("schema_version") != "analysis.v0.1":
         raise ValueError("Only schema_version=analysis.v0.1 is supported in this minimal reconstruction")
 
@@ -76,7 +76,7 @@ def _build_render(analysis: dict[str, Any], song_ref: str) -> dict[str, Any]:
     for event in note_events:
         notes.append(
             {
-                "track": "piano",
+                "track": "primary",
                 "pitch": int(event["pitch"]),
                 "start": _tick_to_bar_beat_tick(int(event["start_tick"]), ppq, numerator),
                 "duration": _duration_to_bar_beat_tick_delta(int(event["duration_ticks"]), ppq, numerator),
@@ -84,18 +84,23 @@ def _build_render(analysis: dict[str, Any], song_ref: str) -> dict[str, Any]:
             }
         )
 
+    first_event = note_events[0] if note_events else {}
+    channel = int(first_event.get("channel", 0))
+    track_index = int(first_event.get("track_index", 0))
+
     return {
-        "schema_version": "0.1",
+        "schema_version": "render.v0.1",
         "song_ref": song_ref,
+        "title": provisional_title,
         "format": "bootstrap",
         "transport": {"bpm": bpm, "ppq": ppq, "time_signature": f"{numerator}/{denominator}"},
         "tracks": [
             {
-                "id": "piano",
-                "name": "Piano",
-                "instrument": "Piano-like (provisional)",
-                "channel": 0,
-                "program": 0,
+                "id": "primary",
+                "name": "Primary Track",
+                "instrument": "unknown_or_assumed",
+                "channel": channel,
+                "source_track_index": track_index,
             }
         ],
         "notes": notes,
@@ -110,7 +115,7 @@ def _build_meta(analysis: dict[str, Any], song_ref: str, analysis_path: Path) ->
         "schema_version": "0.1",
         "song_ref": song_ref,
         "title": inferred.get("provisional_title", "Provisional title"),
-        "usage": "reconstruction trial artifact (not finalized)",
+        "usage": "bootstrap reconstruction artifact (observed-faithful, not finalized)",
         "source_request": {
             "analysis_json": str(analysis_path),
             "schema_version": analysis.get("schema_version"),
@@ -311,6 +316,7 @@ def run_reconstruction(
     reconstructed_root: Path,
     reference_song_dir: Path | None = None,
     song_intent_path: Path | None = None,
+    with_comparison: bool = False,
 ) -> ReconstructionResult:
     analysis = json.loads(analysis_json_path.read_text(encoding="utf-8"))
     temporary_id = str(analysis.get("temporary_id") or "tmp_unknown")
@@ -336,29 +342,34 @@ def run_reconstruction(
         song_intent = _load_structured_file(song_intent_path)
         used_song_intent_path = str(song_intent_path)
 
-    render = _build_render(analysis, song_ref=song_ref)
+    provisional_title = str(analysis.get("inferred", {}).get("provisional_title") or "Provisional title")
+    render = _build_render(analysis, song_ref=song_ref, provisional_title=provisional_title)
     meta = _build_meta(analysis, song_ref=song_ref, analysis_path=analysis_json_path)
 
     render_path = output_dir / "render.yaml"
     meta_path = output_dir / "meta.yaml"
     comparison_path = output_dir / "comparison.md"
+    comparison_mode = "disabled"
 
     render_path.write_text(_dump_yaml(render), encoding="utf-8")
     meta_path.write_text(_dump_yaml(meta), encoding="utf-8")
 
-    comparison, comparison_mode = _build_comparison(
-        target_analysis_path=analysis_json_path,
-        generated_render=render,
-        generated_meta=meta,
-        generated_render_path=render_path,
-        generated_meta_path=meta_path,
-        reference_render=reference_render,
-        reference_meta=reference_meta,
-        compared_reference_path=compared_reference_path,
-        song_intent=song_intent,
-        used_song_intent_path=used_song_intent_path,
-    )
-    comparison_path.write_text(comparison, encoding="utf-8")
+    if with_comparison:
+        comparison, comparison_mode = _build_comparison(
+            target_analysis_path=analysis_json_path,
+            generated_render=render,
+            generated_meta=meta,
+            generated_render_path=render_path,
+            generated_meta_path=meta_path,
+            reference_render=reference_render,
+            reference_meta=reference_meta,
+            compared_reference_path=compared_reference_path,
+            song_intent=song_intent,
+            used_song_intent_path=used_song_intent_path,
+        )
+        comparison_path.write_text(comparison, encoding="utf-8")
+    else:
+        comparison_path = None
 
     return ReconstructionResult(
         temporary_id=temporary_id,
