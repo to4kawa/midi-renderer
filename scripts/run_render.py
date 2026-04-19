@@ -13,7 +13,7 @@ if str(SRC) not in sys.path:
 from midi_renderer.loader import load_render_spec
 from midi_renderer.renderer import render
 from midi_renderer.validator import ValidationError, validate_render_spec
-from midi_renderer.writer import write_placeholder_output
+from midi_renderer.writer import write_midi_output
 
 
 def parse_args() -> argparse.Namespace:
@@ -21,8 +21,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("render_spec", help="Path to render.yaml")
     parser.add_argument(
         "--output",
-        default="out/render_result.json",
-        help="Path to placeholder output artifact",
+        default="out/render_result.mid",
+        help="Path to MIDI output artifact",
     )
     return parser.parse_args()
 
@@ -35,7 +35,7 @@ def main() -> int:
         spec = load_render_spec(spec_path)
         validate_render_spec(spec)
         result = render(spec)
-        output = write_placeholder_output(result, args.output)
+        output = write_midi_output(result, args.output)
     except (OSError, ValueError, ValidationError) as exc:
         print(f"[bootstrap-render] error: {exc}")
         return 1
