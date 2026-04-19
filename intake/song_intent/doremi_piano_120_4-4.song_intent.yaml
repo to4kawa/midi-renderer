@@ -1,0 +1,17 @@
+song_intent:
+  title: "doremi_piano_120_4-4"
+  source: "Reason hand-played"
+  ownership: "user_created"
+  intended_tempo_bpm: 120
+  intended_time_signature: "4/4"
+  intended_length_bars: 16
+  intended_structure:
+    - "first 8 bars are monophonic melody"
+    - "later bars introduce chords"
+    - "rests follow the original melodic phrasing of Do-Re-Mi"
+  left_hand_intent: "simple support / repeated bass"
+  right_hand_intent: "main melody"
+  harmony_intent: "first half mostly single-note, second half includes light chords"
+  timing_policy: "hand-played timing deviations are acceptable"
+  instrument_policy: "instrument label is not strict; synth-played but piano-like intent"
+  comparison_note: "compare against musical intent, not exact quantized score"
