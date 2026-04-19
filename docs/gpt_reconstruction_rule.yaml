@@ -1,0 +1,78 @@
+schema_version: "0.1"
+task_type: "gpt_reconstruction_from_analysis"
+purpose:
+  summary: "Generate draft render.yaml and meta.yaml from analysis.v0.1 JSON."
+  status: "minimal_first_pass"
+
+input_contract:
+  required:
+    - "schema_version == analysis.v0.1"
+    - "source_of_truth == observed"
+    - "observed.note_events[]"
+    - "source.ticks_per_quarter"
+  optional:
+    - "observed.tempo_map[]"
+    - "observed.time_signatures[]"
+    - "inferred.*"
+
+output_contract:
+  render_yaml:
+    role: "execution_source_of_truth"
+    required_fields:
+      - "schema_version"
+      - "song_ref"
+      - "format"
+      - "transport"
+      - "tracks"
+      - "notes"
+  meta_yaml:
+    role: "support_metadata"
+    required_fields:
+      - "schema_version"
+      - "song_ref"
+      - "title"
+      - "source_request"
+      - "review"
+
+reconstruction_policy:
+  - "Prefer observed facts over inferred values."
+  - "Never fabricate missing analysis facts as confirmed values."
+  - "Keep unknowns and caveats in meta.review."
+  - "Use provisional title when final title is unknown."
+
+mapping_guidance:
+  transport:
+    bpm: "observed.tempo_map[0].bpm (fallback 120)"
+    ppq: "source.ticks_per_quarter"
+    time_signature: "observed.time_signatures[0] as numerator/denominator (fallback 4/4)"
+  tracks:
+    policy: "Single piano track for first fixed neko reconstruction"
+    fixed_track:
+      id: "piano"
+      name: "Piano"
+      instrument: "Acoustic Grand Piano"
+      channel: 0
+      program: 0
+  notes:
+    mapping:
+      track: "piano"
+      pitch: "observed.note_events[].pitch"
+      start: "convert start_tick -> bar:beat:tick"
+      duration: "convert duration_ticks -> bar:beat:tick_delta"
+      velocity: "observed.note_events[].velocity"
+
+comparison_policy:
+  fixed_reference_path: "songs/neko_funjatta_test_piano_120"
+  minimum_report_sections:
+    - "compared_reference_path"
+    - "generated_render_path"
+    - "generated_meta_path"
+    - "short_summary"
+    - "obvious_matches"
+    - "obvious_differences"
+    - "unresolved_items"
+
+not_in_scope_yet:
+  - "finalize promotion to songs/"
+  - "final song_id decision"
+  - "advanced scoring or semantic inference"

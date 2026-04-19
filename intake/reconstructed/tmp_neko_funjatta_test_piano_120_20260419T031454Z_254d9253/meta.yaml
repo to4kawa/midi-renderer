@@ -1,0 +1,22 @@
+schema_version: '0.1'
+song_ref: neko_funjatta_test_piano_120
+title: neko_funjatta_test_piano_120
+usage: reconstruction trial artifact (not finalized)
+source_request:
+  analysis_json: /workspace/midi-renderer/intake/analysis/tmp_neko_funjatta_test_piano_120_20260419T031454Z_254d9253.analysis.json
+  schema_version: analysis.v0.1
+  source_of_truth: observed
+review:
+  status: provisional
+  unknown_fields:
+  - final_song_id
+  - arrangement_sections
+  - render_yaml_mapping
+  - meta_yaml_mapping
+  warnings:
+  - No advanced multi-instrument semantic inference.
+  - No cleanup/finalize integration in this step.
+  lossy_points:
+  - instrument semantics not preserved
+  - section labels not recoverable from MIDI alone
+  - render/meta mapping not finalized
