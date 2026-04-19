@@ -1,0 +1,292 @@
+{
+  "schema_version": "0.1.0-provisional",
+  "analysis_id": "analysis_tmp_neko_funjatta_test_piano_120_20260419T025245Z_6adc9b89",
+  "temporary_id": "tmp_neko_funjatta_test_piano_120_20260419T025245Z_6adc9b89",
+  "source": {
+    "original_filename": "neko_funjatta_test_piano_120.mid",
+    "original_path": "intake/midi/neko_funjatta_test_piano_120.mid",
+    "midi_format": 1,
+    "track_count": 2,
+    "ticks_per_quarter": 480
+  },
+  "observed": {
+    "tempo_map": [
+      {
+        "tick": 0,
+        "tempo_microseconds_per_quarter": 500000,
+        "bpm": 120.0,
+        "track": 0
+      }
+    ],
+    "time_signatures": [
+      {
+        "tick": 0,
+        "numerator": 3,
+        "denominator": 4,
+        "track": 0
+      }
+    ],
+    "note_events": [
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 67,
+        "start_tick": 0,
+        "end_tick": 480,
+        "duration_ticks": 480,
+        "velocity": 96
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 69,
+        "start_tick": 480,
+        "end_tick": 960,
+        "duration_ticks": 480,
+        "velocity": 96
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 67,
+        "start_tick": 960,
+        "end_tick": 1440,
+        "duration_ticks": 480,
+        "velocity": 96
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 69,
+        "start_tick": 1440,
+        "end_tick": 1920,
+        "duration_ticks": 480,
+        "velocity": 96
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 67,
+        "start_tick": 1920,
+        "end_tick": 2400,
+        "duration_ticks": 480,
+        "velocity": 96
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 64,
+        "start_tick": 2400,
+        "end_tick": 2880,
+        "duration_ticks": 480,
+        "velocity": 96
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 67,
+        "start_tick": 2880,
+        "end_tick": 3360,
+        "duration_ticks": 480,
+        "velocity": 96
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 69,
+        "start_tick": 3360,
+        "end_tick": 3840,
+        "duration_ticks": 480,
+        "velocity": 96
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 67,
+        "start_tick": 3840,
+        "end_tick": 4320,
+        "duration_ticks": 480,
+        "velocity": 96
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 69,
+        "start_tick": 4320,
+        "end_tick": 4800,
+        "duration_ticks": 480,
+        "velocity": 96
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 67,
+        "start_tick": 4800,
+        "end_tick": 5280,
+        "duration_ticks": 480,
+        "velocity": 96
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 64,
+        "start_tick": 5280,
+        "end_tick": 5760,
+        "duration_ticks": 480,
+        "velocity": 96
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 60,
+        "start_tick": 5760,
+        "end_tick": 6240,
+        "duration_ticks": 480,
+        "velocity": 92
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 62,
+        "start_tick": 6240,
+        "end_tick": 6720,
+        "duration_ticks": 480,
+        "velocity": 92
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 64,
+        "start_tick": 6720,
+        "end_tick": 7200,
+        "duration_ticks": 480,
+        "velocity": 92
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 65,
+        "start_tick": 7200,
+        "end_tick": 7680,
+        "duration_ticks": 480,
+        "velocity": 92
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 67,
+        "start_tick": 7680,
+        "end_tick": 8160,
+        "duration_ticks": 480,
+        "velocity": 92
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 69,
+        "start_tick": 8160,
+        "end_tick": 8640,
+        "duration_ticks": 480,
+        "velocity": 92
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 71,
+        "start_tick": 8640,
+        "end_tick": 9120,
+        "duration_ticks": 480,
+        "velocity": 92
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 72,
+        "start_tick": 9120,
+        "end_tick": 9600,
+        "duration_ticks": 480,
+        "velocity": 92
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 71,
+        "start_tick": 9600,
+        "end_tick": 10080,
+        "duration_ticks": 480,
+        "velocity": 92
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 69,
+        "start_tick": 10080,
+        "end_tick": 10560,
+        "duration_ticks": 480,
+        "velocity": 92
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 67,
+        "start_tick": 10560,
+        "end_tick": 11040,
+        "duration_ticks": 480,
+        "velocity": 92
+      },
+      {
+        "track": 1,
+        "channel": 0,
+        "note": 64,
+        "start_tick": 11040,
+        "end_tick": 11520,
+        "duration_ticks": 480,
+        "velocity": 92
+      }
+    ],
+    "total_ticks": 11520,
+    "first_note_tick": 0,
+    "last_note_tick": 11520
+  },
+  "inferred": {
+    "provisional_title": "neko_funjatta_test_piano_120",
+    "tempo_summary": {
+      "initial_bpm": 120.0,
+      "tempo_change_count": 0,
+      "has_explicit_tempo": true
+    },
+    "structural_summary": {
+      "note_count": 24,
+      "time_signature_change_count": 0,
+      "track_count_with_notes": 1
+    },
+    "reconstruction_hints": {
+      "preferred_quantization": "defer",
+      "needs_manual_title_review": true,
+      "notes": [
+        "Provisional output intended for reverse-analysis iteration.",
+        "Use observed.note_events as source-of-truth extraction output."
+      ]
+    }
+  },
+  "unknown": {
+    "deferred_fields": [
+      "final_song_id",
+      "arrangement_sections",
+      "render_yaml_mapping",
+      "meta_yaml_mapping"
+    ]
+  },
+  "quality": {
+    "status": "provisional",
+    "warnings": [
+      "No advanced multi-instrument semantic inference.",
+      "No cleanup/finalize integration in this step."
+    ]
+  },
+  "provenance": {
+    "generated_at_utc": "2026-04-19T02:52:45.205230Z",
+    "generator": "midi_renderer.analysis.midi_to_json",
+    "mode": "single_file_minimal"
+  }
+}
