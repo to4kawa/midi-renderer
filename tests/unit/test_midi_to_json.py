@@ -31,6 +31,17 @@ def test_build_analysis_payload_includes_required_sections() -> None:
     observed = payload["observed"]
     for key in ["tempo_map", "time_signatures", "note_events", "total_ticks", "first_note_tick", "last_note_tick"]:
         assert key in observed
+    first_note_event = observed["note_events"][0]
+    assert "track_index" in first_note_event
+    assert "pitch" in first_note_event
+    assert "track" not in first_note_event
+    assert "note" not in first_note_event
+
+    assert payload["schema_version"] == "analysis.v0.1"
+    assert payload["unknown"]["fields"]
+    assert "deferred_fields" not in payload["unknown"]
+    assert payload["quality"]["lossy_points"]
+    assert payload["provenance"]["generator_version"] == "0.1.0"
 
     assert payload["source"]["original_filename"] == midi_path.name
     assert payload["source"]["track_count"] >= 1
