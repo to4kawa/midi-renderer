@@ -1,0 +1,10 @@
+schema_version: "0.1"
+song_ref: "neko_funjatta_test_piano_120"
+title: "猫ふんじゃった"
+usage: "renderer bootstrap test case"
+source_request:
+  instrumentation: "Piano only"
+  bpm: 120
+notes:
+  - "Support metadata only."
+  - "Execution-critical fields remain in render.yaml."

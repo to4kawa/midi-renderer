@@ -24,42 +24,75 @@ def _parse_scalar(value: str) -> Any:
 def _minimal_yaml_parse(text: str) -> dict[str, Any]:
     """Very small YAML subset parser for bootstrap tests.
 
-    Supports top-level keys and single-level nested mappings.
+    Supports mappings and list items used by bootstrap render specs.
     """
-    result: dict[str, Any] = {}
-    current_parent: str | None = None
-
+    lines: list[tuple[int, str]] = []
     for raw_line in text.splitlines():
-        line = raw_line.rstrip()
-        if not line or line.lstrip().startswith("#"):
+        stripped = raw_line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        indent = len(raw_line) - len(raw_line.lstrip(" "))
+        lines.append((indent, raw_line[indent:].rstrip()))
+
+    if not lines:
+        return {}
+
+    root: dict[str, Any] = {}
+    stack: list[tuple[int, Any]] = [(-1, root)]
+
+    for index, (indent, content) in enumerate(lines):
+        while len(stack) > 1 and indent <= stack[-1][0]:
+            stack.pop()
+
+        parent = stack[-1][1]
+        next_indent = lines[index + 1][0] if index + 1 < len(lines) else -1
+
+        if content.startswith("- "):
+            if not isinstance(parent, list):
+                raise LoaderError(f"Invalid list item placement: {content}")
+
+            item_content = content[2:].strip()
+            if ":" in item_content:
+                key, sep, value = item_content.partition(":")
+                if not sep:
+                    raise LoaderError(f"Invalid YAML line: {content}")
+                item: dict[str, Any] = {}
+                if value.strip():
+                    item[key.strip()] = _parse_scalar(value)
+                    parent.append(item)
+                else:
+                    nested: dict[str, Any] = {}
+                    item[key.strip()] = nested
+                    parent.append(item)
+                    stack.append((indent, nested))
+                if next_indent > indent and value.strip():
+                    stack.append((indent, item))
+            elif item_content:
+                parent.append(_parse_scalar(item_content))
+            else:
+                nested_item: dict[str, Any] = {}
+                parent.append(nested_item)
+                stack.append((indent, nested_item))
             continue
 
-        if line.startswith("  "):
-            if current_parent is None:
-                raise LoaderError("Invalid indentation in YAML")
-            key, sep, value = line.strip().partition(":")
-            if not sep:
-                raise LoaderError(f"Invalid YAML line: {raw_line}")
-            parent = result.get(current_parent)
-            if not isinstance(parent, dict):
-                raise LoaderError("Nested YAML entry without mapping parent")
-            parent[key.strip()] = _parse_scalar(value)
-            continue
-
-        key, sep, value = line.partition(":")
+        key, sep, value = content.partition(":")
         if not sep:
-            raise LoaderError(f"Invalid YAML line: {raw_line}")
+            raise LoaderError(f"Invalid YAML line: {content}")
 
         key = key.strip()
         value = value.strip()
-        if value == "":
-            result[key] = {}
-            current_parent = key
-        else:
-            result[key] = _parse_scalar(value)
-            current_parent = None
+        if not isinstance(parent, dict):
+            raise LoaderError(f"Invalid mapping placement: {content}")
 
-    return result
+        if value:
+            parent[key] = _parse_scalar(value)
+            continue
+
+        container: Any = [] if next_indent > indent and lines[index + 1][1].startswith("- ") else {}
+        parent[key] = container
+        stack.append((indent, container))
+
+    return root
 
 
 def load_yaml(path: str | Path) -> dict[str, Any]:
