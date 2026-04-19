@@ -14,6 +14,8 @@ input_contract:
     - "observed.tempo_map[]"
     - "observed.time_signatures[]"
     - "inferred.*"
+    - "reference song path"
+    - "song_intent yaml/json"
 
 output_contract:
   render_yaml:
@@ -39,6 +41,7 @@ reconstruction_policy:
   - "Never fabricate missing analysis facts as confirmed values."
   - "Keep unknowns and caveats in meta.review."
   - "Use provisional title when final title is unknown."
+  - "Do not hardcode cat/neko song references."
 
 mapping_guidance:
   transport:
@@ -46,11 +49,11 @@ mapping_guidance:
     ppq: "source.ticks_per_quarter"
     time_signature: "observed.time_signatures[0] as numerator/denominator (fallback 4/4)"
   tracks:
-    policy: "Single piano track for first fixed neko reconstruction"
+    policy: "Single piano-like track for minimal reconstruction"
     fixed_track:
       id: "piano"
       name: "Piano"
-      instrument: "Acoustic Grand Piano"
+      instrument: "Piano-like (provisional)"
       channel: 0
       program: 0
   notes:
@@ -62,15 +65,22 @@ mapping_guidance:
       velocity: "observed.note_events[].velocity"
 
 comparison_policy:
-  fixed_reference_path: "songs/neko_funjatta_test_piano_120"
+  input_priority:
+    - "reference song path"
+    - "song_intent yaml/json"
+    - "unavailable"
   minimum_report_sections:
-    - "compared_reference_path"
+    - "target_analysis_path"
     - "generated_render_path"
     - "generated_meta_path"
+    - "comparison_mode"
     - "short_summary"
     - "obvious_matches"
     - "obvious_differences"
     - "unresolved_items"
+  optional_report_sections:
+    - "compared_reference_path"
+    - "used_song_intent_path"
 
 not_in_scope_yet:
   - "finalize promotion to songs/"
