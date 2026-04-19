@@ -1,32 +1,37 @@
-schema_version: "0.1"
+schema_version: "0.2"
 task_type: "gpt_music_spec_authoring"
+
 purpose:
-  summary: "Convert natural-language music requests into executable render specs."
+  summary: "Convert natural-language music requests into executable specs and clean Codex handoff instructions."
   primary_output: "render.yaml"
   optional_output: "meta.yaml"
-  output_layers:
-    song_spec_output:
-      - "render.yaml"
-      - "meta.yaml (optional)"
-    codex_handoff_output:
-      - "song_spec_output"
-      - "codex_execution_instruction (placement/apply guidance)"
+
+output_layers:
+  song_spec_output:
+    - "render.yaml"
+    - "meta.yaml (optional)"
+  codex_handoff_output:
+    - "codex_execution_instruction"
+  rules:
+    - "Song spec output is not the same thing as Codex handoff output."
+    - "Do not mix song spec output and Codex handoff output unless explicitly requested."
+    - "In spec authoring phase, default to song spec output only."
 
 roles:
   gpt:
     - "Interpret user intent into structured music-spec constraints."
-    - "Propose role-based arrangement before spec emission."
+    - "Propose an initial role-based arrangement before spec emission."
     - "Generate render.yaml after required information is complete."
+    - "Generate meta.yaml only when useful."
+    - "Generate codex_execution_instruction only when explicitly requested or when the user asks to run/apply/execute via Codex."
   codex:
     - "Apply approved specs to repository files."
-    - "Keep implementation edits scoped to requested work."
+    - "Execute repository-local render workflows."
+    - "Keep repository changes minimal and focused."
 
 source_of_truth:
   execution_spec: "render.yaml"
   support_metadata: "meta.yaml"
-  rules:
-    - "render.yaml is the execution spec."
-    - "meta.yaml is optional support metadata."
 
 conversation_flow:
   phases:
@@ -34,7 +39,8 @@ conversation_flow:
     - "interpret_request"
     - "propose_initial_arrangement"
     - "resolve_missing_required_info"
-    - "emit_spec"
+    - "emit_song_spec"
+    - "emit_codex_handoff_if_requested"
   startup_behavior:
     - "Do not emit render.yaml on first user request."
     - "Return start_response_format and stop at final_line."
@@ -80,12 +86,15 @@ render_yaml_policy:
     - "render.yaml must contain only execution-relevant fields."
     - "Exclude conversational commentary and rationale."
     - "Use normalized instruments, pitch, and timing formats."
+    - "Keep compatibility with docs/render_spec.md bootstrap contract unless a stricter renderer-side contract is explicitly requested."
+    - "Do not add repository placement/apply instructions into render.yaml."
 
 meta_yaml_policy:
   enabled: true
   purpose: "Optional support metadata for workflow context."
   rules:
     - "Do not duplicate execution-critical fields from render.yaml unless needed for traceability."
+    - "Keep meta.yaml descriptive, not executable."
 
 ambiguity_policy:
   general_rule: "Resolve safe defaults only when non-critical; otherwise ask minimal clarifying questions."
@@ -101,10 +110,8 @@ output_contract:
       optional_file: "meta.yaml"
       rule: "Song spec output includes only render.yaml and optional meta.yaml."
     codex_handoff_output:
-      includes:
-        - "song_spec_output"
-        - "codex_execution_instruction"
-      rule: "Codex handoff output is song spec output plus execution instruction."
+      required_file: "codex_execution_instruction"
+      rule: "Codex handoff output is a separate instruction artifact."
   first_response:
     required_fields:
       - "current_interpretation"
@@ -112,17 +119,39 @@ output_contract:
       - "readiness"
       - "next_action"
     final_line_mandatory: "準備いい？"
-  spec_response:
-    required_file: "render.yaml"
-    optional_file: "meta.yaml"
-    authoring_phase_rules:
-      allowed_outputs:
-        - "render_yaml"
-        - "meta_yaml (optional)"
-      forbidden_unless_explicitly_requested:
-        - "files wrappers"
-        - "apply/patch structures"
-        - "validation summaries"
+
+authoring_phase_rules:
+  allowed_outputs:
+    - "render_yaml"
+    - "meta_yaml (optional)"
+  forbidden_unless_explicitly_requested:
+    - "files wrappers"
+    - "apply/patch structures"
+    - "validation summaries"
+    - "github_apply_steps"
+    - "repository placement instructions"
+
+codex_handoff_policy:
+  emit_when:
+    - "user explicitly asks for Codex instruction"
+    - "user asks to run/apply/execute/render via Codex"
+  required_fields:
+    - "task_type"
+    - "target_repository"
+    - "assumptions"
+    - "codex_execution_instruction"
+  rules:
+    - "Do not include render.yaml or meta.yaml content inside codex_execution_instruction unless explicitly requested."
+    - "If the task is verify-only, say so explicitly."
+    - "If the task is implement-and-run, say so explicitly."
+    - "If the task is persist-artifact-to-repo, say so explicitly."
+
+execution_result_policy:
+  rules:
+    - "Allow no-change success as a valid outcome."
+    - "If execution succeeds with zero edits, require an explicit no-change statement."
+    - "Differentiate between generated_in_execution_env and committed_to_repo."
+    - "If the user expects a repository file, Codex handoff must explicitly instruct artifact placement inside the repo."
 
 start_response_format:
   keys_in_order:
@@ -138,3 +167,4 @@ done_definition:
     - "render.yaml is valid and execution-ready."
     - "Optional meta.yaml is included only when useful."
     - "All normalization and timing rules are satisfied."
+    - "If Codex handoff was requested, the handoff artifact is clearly separated from song spec output."
