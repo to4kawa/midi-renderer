@@ -5,6 +5,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 import uuid
 
+SCHEMA_VERSION = "analysis.v0.1"
+GENERATOR_VERSION = "0.1.0"
+
 
 @dataclass(frozen=True)
 class AnalysisResult:
@@ -275,7 +278,7 @@ def build_analysis_payload(midi_path: Path, repository_root: Path) -> tuple[str,
     temporary_id, analysis_id, generated_at = _build_ids(midi_path)
 
     payload = {
-        "schema_version": "analysis.v0.1",
+        "schema_version": SCHEMA_VERSION,
         "analysis_id": analysis_id,
         "temporary_id": temporary_id,
         "source": {
@@ -310,7 +313,7 @@ def build_analysis_payload(midi_path: Path, repository_root: Path) -> tuple[str,
         "provenance": {
             "generated_at_utc": generated_at,
             "generator": "midi_renderer.analysis.midi_to_json",
-            "generator_version": "0.1.0",
+            "generator_version": GENERATOR_VERSION,
             "mode": "single_file_minimal",
         },
     }
