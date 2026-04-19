@@ -41,6 +41,10 @@ This document defines the GPT-side startup and operating rules for turning natur
 - Use `bar:beat:tick_delta` for duration.
 
 # Output policy
+- GPT outputs happen in layers:
+  - Song spec output = `render.yaml` and optional `meta.yaml`.
+  - Codex handoff output = song spec output plus Codex execution instruction (for placement/apply steps).
+- Song spec is not the same thing as Codex handoff.
 - `render.yaml` is the execution source of truth.
 - `render.yaml` must contain only execution-relevant fields.
 - `meta.yaml` is optional support metadata.
