@@ -1,0 +1,16 @@
+song_intent:
+  title: "Kirakirahosi_guitar_131_4-4"
+  source: "Reason hand-played"
+  ownership: "user_created"
+  intended_tempo_bpm: 131
+  intended_time_signature: "4/4"
+  intended_structure:
+    - "main melody follows Twinkle, Twinkle, Little Star"
+    - "bass/support is based on repeated C-G motion"
+    - "ending includes a sustained C chord because remaining length was used to close the phrase"
+  left_hand_intent: "simple bass/support using repeated C-G"
+  right_hand_intent: "main melody"
+  harmony_intent: "simple support with final sustained C chord"
+  timing_policy: "hand-played timing deviations are acceptable"
+  instrument_policy: "played with Reason ID8 guitar patch; instrument identity is not strict and comparison should focus on musical structure"
+  comparison_note: "compare against musical intent, not exact quantized score or exact instrument identity"
