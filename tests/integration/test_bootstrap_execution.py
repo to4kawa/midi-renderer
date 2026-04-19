@@ -30,3 +30,20 @@ def test_bootstrap_entrypoint_runs(tmp_path: Path) -> None:
     assert completed.returncode == 0, completed.stderr
     assert output.exists()
     assert "[bootstrap-render] wrote:" in completed.stdout
+
+
+def test_bootstrap_canonical_song_path_runs(tmp_path: Path) -> None:
+    output = tmp_path / "render_result.json"
+
+    cmd = [
+        sys.executable,
+        "scripts/run_render.py",
+        "songs/neko_funjatta_test_piano_120/render.yaml",
+        "--output",
+        str(output),
+    ]
+    completed = subprocess.run(cmd, check=False, capture_output=True, text=True)
+
+    assert completed.returncode == 0, completed.stderr
+    assert output.exists()
+    assert "[bootstrap-render] wrote:" in completed.stdout
