@@ -38,6 +38,7 @@ def test_build_analysis_payload_includes_required_sections() -> None:
     assert "note" not in first_note_event
 
     assert payload["schema_version"] == "analysis.v0.1"
+    assert set(payload["unknown"].keys()) == {"fields"}
     assert payload["unknown"]["fields"]
     assert "deferred_fields" not in payload["unknown"]
     assert payload["quality"]["lossy_points"]

@@ -49,3 +49,11 @@ Purpose: capture structured analysis output between intake and reconstruction.
   - `generator`
   - `generator_version`
   - `mode`
+
+## Compatibility Notes
+
+- `0.1.0-provisional` から `analysis.v0.1` へ識別子を更新。
+- `observed.note_events[]` は `track` / `note` を廃止し、`track_index` / `pitch` を使用。
+- `unknown.deferred_fields` は `unknown.fields` へ統一。
+- `quality.lossy_points` と `provenance.generator_version` を追加。
+- `observed` / `inferred` / `unknown` / `quality` / `provenance` の責務分離は継続。
