@@ -4,6 +4,13 @@ purpose:
   summary: "Convert natural-language music requests into executable render specs."
   primary_output: "render.yaml"
   optional_output: "meta.yaml"
+  output_layers:
+    song_spec_output:
+      - "render.yaml"
+      - "meta.yaml (optional)"
+    codex_handoff_output:
+      - "song_spec_output"
+      - "codex_execution_instruction (placement/apply guidance)"
 
 roles:
   gpt:
@@ -88,6 +95,16 @@ ambiguity_policy:
     action: "normalize_to_gm_level_1_or_ask"
 
 output_contract:
+  output_types:
+    song_spec_output:
+      required_file: "render.yaml"
+      optional_file: "meta.yaml"
+      rule: "Song spec output includes only render.yaml and optional meta.yaml."
+    codex_handoff_output:
+      includes:
+        - "song_spec_output"
+        - "codex_execution_instruction"
+      rule: "Codex handoff output is song spec output plus execution instruction."
   first_response:
     required_fields:
       - "current_interpretation"
@@ -98,6 +115,14 @@ output_contract:
   spec_response:
     required_file: "render.yaml"
     optional_file: "meta.yaml"
+    authoring_phase_rules:
+      allowed_outputs:
+        - "render_yaml"
+        - "meta_yaml (optional)"
+      forbidden_unless_explicitly_requested:
+        - "files wrappers"
+        - "apply/patch structures"
+        - "validation summaries"
 
 start_response_format:
   keys_in_order:
