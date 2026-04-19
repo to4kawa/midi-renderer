@@ -10,7 +10,7 @@
 
 ## Canonical command
 ```bash
-python scripts/run_render.py songs/<song_id>/render.yaml --output out/<song_id>/render_result.mid
+python scripts/run_render.py songs/<song_id>/render.yaml --output out/<song_id>/<song_id>.mid
 ```
 
 ## Expected success signal
