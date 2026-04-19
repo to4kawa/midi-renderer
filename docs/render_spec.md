@@ -1,7 +1,7 @@
 # Render Spec (Bootstrap)
 
 ## Overview
-The primary contract is `songs/<song_id>/render.yaml`. This document defines the minimum expected shape for bootstrap-stage development.
+The primary contract is `songs/<song_id>/render.yaml`. This document defines the minimum expected shape for bootstrap-stage development. The active bootstrap render flow writes real MIDI (`.mid`) output.
 
 ## Primary input file: render.yaml
 - Required path pattern: `songs/<song_id>/render.yaml`
