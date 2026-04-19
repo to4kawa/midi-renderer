@@ -1,0 +1,57 @@
+date: "2026-04-19"
+project: "midi-renderer"
+theme: "reverse-analysis loop の最小運用確立"
+
+やったこと:
+- "repo 骨格を整備"
+- "MIDI -> analysis JSON の最小 analyze 導線を作成・確認"
+- "analysis JSON schema を軽修正して v0.1 系に整理"
+- "analysis JSON -> render.yaml / meta.yaml の reconstruction 導線を作成"
+- "comparison を導入し、その後 optional artifact に整理"
+- "猫データで pipeline を確認"
+- "doremi で intent-aware comparison を確認"
+- "Kirakirahosi で bootstrap render v0.1 の shape を確認"
+
+対象:
+- "neko_funjatta_test_piano_120.mid"
+- "doremi_piano_120_4-4.mid"
+- "Kirakirahosi_guitar_131_4-4.mid"
+
+判断:
+- "GitHub repo を正本、Codex App local を実行・生成物回収側とする"
+- "render.yaml は execution source of truth"
+- "meta.yaml は support metadata"
+- "intake では final song_id を決めない"
+- "analysis は消さず履歴保存する"
+- "comparison は必須ではなく optional artifact にする"
+- "render.yaml は bootstrap render として運用する"
+- "高度な構造理解（前半単音/後半和音など）は render 本体ではなく GPT 側の解釈層で扱う"
+- "楽器意味は厳密比較しない"
+
+判断理由:
+- "初期は reverse-analysis の導線確立を優先したため"
+- "生成物比較より、render/meta の分離と再構成品質が主題になったため"
+- "Reason 手弾き MIDI は高PPQ・微細 timing を持つため、raw 観測と解釈を分けたほうが安全なため"
+
+未解決事項:
+- "meta.yaml の責務をさらにどこまで固定するか"
+- "normalized render を将来どう定義するか"
+- "前半/後半、単音/和音などの軽い構造理解を GPT 出力へどう反映するか"
+- "finalize 導線をいつ実装するか"
+- "複数楽器・複数トラックの意味推定をどう扱うか"
+
+次にやること:
+- "meta.yaml の中身を検討する"
+- "必要なら GPT reconstruction rule を meta 寄りに更新する"
+- "別曲を追加して generalization を見る"
+
+今回わかるようになったこと:
+- "analysis JSON -> render.yaml / meta.yaml の最小導線は成立する"
+- "comparison は常設主機能でなく補助機能で十分"
+- "song_intent を使うと、正本がない自作曲でも比較運用できる"
+- "高PPQ の raw timing は analysis では有用だが、最終 render 表現にはそのままでは重い"
+
+今回新たに気づいた観点:
+- "track 名や instrument 名の問題は本質課題ではなく表現課題に近い"
+- "前半単音/後半和音のような理解は dump ではなく解釈層の責務"
+- "自作 MIDI を使うと答え合わせ観点を持てるので、reverse-analysis 設計が進めやすい"
