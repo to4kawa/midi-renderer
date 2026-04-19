@@ -8,7 +8,8 @@ def test_bootstrap_entrypoint_runs(tmp_path: Path) -> None:
     spec.write_text(
         "\n".join(
             [
-                "schema_version: '0.1'",
+                "schema_version: 'render.v0.1'",
+                "title: test-song provisional",
                 "song_ref: test-song",
                 "format: bootstrap",
                 "transport:",
@@ -16,12 +17,12 @@ def test_bootstrap_entrypoint_runs(tmp_path: Path) -> None:
                 "  ppq: 480",
                 "  time_signature: '4/4'",
                 "tracks:",
-                "  - id: piano",
-                "    name: Piano",
+                "  - id: primary",
+                "    name: Primary Track",
                 "    channel: 0",
-                "    program: 0",
+                "    instrument: unknown_or_assumed",
                 "notes:",
-                "  - track: piano",
+                "  - track: primary",
                 "    pitch: 60",
                 "    start: '1:1:0'",
                 "    duration: '0:1:0'",

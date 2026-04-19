@@ -19,10 +19,11 @@ input_contract:
 
 output_contract:
   render_yaml:
-    role: "execution_source_of_truth"
+    role: "bootstrap_execution_spec"
     required_fields:
       - "schema_version"
       - "song_ref"
+      - "title"
       - "format"
       - "transport"
       - "tracks"
@@ -44,27 +45,38 @@ reconstruction_policy:
   - "Do not hardcode cat/neko song references."
 
 mapping_guidance:
+  schema_version:
+    value: "render.v0.1"
+  song_ref:
+    policy: "Use temporary_id-based song_ref during reconstruction phase"
+  title:
+    policy: "Use inferred.provisional_title when available, else fallback to 'Provisional title'"
+  format:
+    value: "bootstrap"
+    meaning: "Observed-faithful trial/bootstrap render, not normalized/final render"
   transport:
     bpm: "observed.tempo_map[0].bpm (fallback 120)"
     ppq: "source.ticks_per_quarter"
     time_signature: "observed.time_signatures[0] as numerator/denominator (fallback 4/4)"
   tracks:
-    policy: "Single piano-like track for minimal reconstruction"
+    policy: "Single neutral primary track for minimal reconstruction"
     fixed_track:
-      id: "piano"
-      name: "Piano"
-      instrument: "Piano-like (provisional)"
-      channel: 0
-      program: 0
+      id: "primary"
+      name: "Primary Track"
+      instrument: "unknown_or_assumed"
+      channel: "observed.note_events[0].channel (fallback 0)"
+      source_track_index: "observed.note_events[0].track_index (fallback 0)"
   notes:
     mapping:
-      track: "piano"
+      track: "primary"
       pitch: "observed.note_events[].pitch"
       start: "convert start_tick -> bar:beat:tick"
       duration: "convert duration_ticks -> bar:beat:tick_delta"
       velocity: "observed.note_events[].velocity"
 
 comparison_policy:
+  default_generation: "disabled"
+  opt_in_flag: "--with-comparison"
   input_priority:
     - "reference song path"
     - "song_intent yaml/json"
@@ -86,3 +98,5 @@ not_in_scope_yet:
   - "finalize promotion to songs/"
   - "final song_id decision"
   - "advanced scoring or semantic inference"
+  - "automatic section-level semantic understanding (e.g., single-note/chord phase split)"
+  - "normalized render implementation and PPQ normalization"

@@ -16,6 +16,9 @@ A render spec must include:
 - `tracks`
 - `notes`
 
+Bootstrap reconstruction currently writes `schema_version: render.v0.1` and `format: bootstrap`.
+This indicates an observed-faithful trial spec for regeneration, not a normalized/final render contract.
+
 ## Transport fields
 Bootstrap expects transport to be a mapping with at least:
 - `bpm`

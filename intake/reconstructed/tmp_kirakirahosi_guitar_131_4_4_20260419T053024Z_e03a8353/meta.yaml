@@ -1,7 +1,7 @@
 schema_version: '0.1'
 song_ref: tmp_kirakirahosi_guitar_131_4_4_20260419T053024Z_e03a8353
 title: Kirakirahosi_guitar_131_4-4
-usage: reconstruction trial artifact (not finalized)
+usage: bootstrap reconstruction artifact (observed-faithful, not finalized)
 source_request:
   analysis_json: /workspace/midi-renderer/intake/analysis/tmp_kirakirahosi_guitar_131_4_4_20260419T053024Z_e03a8353.analysis.json
   schema_version: analysis.v0.1
