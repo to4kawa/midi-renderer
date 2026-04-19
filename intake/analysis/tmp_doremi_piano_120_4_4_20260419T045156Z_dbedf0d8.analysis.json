@@ -1,0 +1,649 @@
+{
+  "schema_version": "analysis.v0.1",
+  "analysis_id": "analysis_tmp_doremi_piano_120_4_4_20260419T045156Z_dbedf0d8",
+  "temporary_id": "tmp_doremi_piano_120_4_4_20260419T045156Z_dbedf0d8",
+  "source": {
+    "original_filename": "doremi_piano_120_4-4.mid",
+    "original_path": "intake/doremi_piano_120_4-4.mid",
+    "midi_format": 1,
+    "track_count": 3,
+    "ticks_per_quarter": 15360
+  },
+  "observed": {
+    "tempo_map": [
+      {
+        "tick": 0,
+        "tempo_microseconds_per_quarter": 500000,
+        "bpm": 120.0,
+        "track": 0
+      }
+    ],
+    "time_signatures": [
+      {
+        "tick": 0,
+        "numerator": 4,
+        "denominator": 4,
+        "track": 0
+      }
+    ],
+    "note_events": [
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 60,
+        "start_tick": 264,
+        "end_tick": 18718,
+        "duration_ticks": 18454,
+        "velocity": 100
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 62,
+        "start_tick": 23151,
+        "end_tick": 26005,
+        "duration_ticks": 2854,
+        "velocity": 95
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 64,
+        "start_tick": 30875,
+        "end_tick": 48911,
+        "duration_ticks": 18036,
+        "velocity": 104
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 60,
+        "start_tick": 53517,
+        "end_tick": 55780,
+        "duration_ticks": 2263,
+        "velocity": 85
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 64,
+        "start_tick": 60681,
+        "end_tick": 71706,
+        "duration_ticks": 11025,
+        "velocity": 93
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 60,
+        "start_tick": 76263,
+        "end_tick": 89428,
+        "duration_ticks": 13165,
+        "velocity": 95
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 64,
+        "start_tick": 92454,
+        "end_tick": 110797,
+        "duration_ticks": 18343,
+        "velocity": 92
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 62,
+        "start_tick": 122210,
+        "end_tick": 140215,
+        "duration_ticks": 18005,
+        "velocity": 116
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 64,
+        "start_tick": 145067,
+        "end_tick": 148308,
+        "duration_ticks": 3241,
+        "velocity": 100
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 65,
+        "start_tick": 151954,
+        "end_tick": 155023,
+        "duration_ticks": 3069,
+        "velocity": 96
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 65,
+        "start_tick": 159118,
+        "end_tick": 162298,
+        "duration_ticks": 3180,
+        "velocity": 74
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 64,
+        "start_tick": 167088,
+        "end_tick": 169554,
+        "duration_ticks": 2466,
+        "velocity": 79
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 62,
+        "start_tick": 175088,
+        "end_tick": 176718,
+        "duration_ticks": 1630,
+        "velocity": 83
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 65,
+        "start_tick": 182516,
+        "end_tick": 228279,
+        "duration_ticks": 45763,
+        "velocity": 124
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 64,
+        "start_tick": 244483,
+        "end_tick": 264333,
+        "duration_ticks": 19850,
+        "velocity": 89
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 65,
+        "start_tick": 269215,
+        "end_tick": 272333,
+        "duration_ticks": 3118,
+        "velocity": 93
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 67,
+        "start_tick": 277123,
+        "end_tick": 294772,
+        "duration_ticks": 17649,
+        "velocity": 70
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 69,
+        "start_tick": 277172,
+        "end_tick": 282085,
+        "duration_ticks": 4913,
+        "velocity": 74
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 64,
+        "start_tick": 298756,
+        "end_tick": 301130,
+        "duration_ticks": 2374,
+        "velocity": 83
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 67,
+        "start_tick": 305859,
+        "end_tick": 317955,
+        "duration_ticks": 12096,
+        "velocity": 90
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 64,
+        "start_tick": 322173,
+        "end_tick": 333974,
+        "duration_ticks": 11801,
+        "velocity": 96
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 67,
+        "start_tick": 337091,
+        "end_tick": 361018,
+        "duration_ticks": 23927,
+        "velocity": 73
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 65,
+        "start_tick": 368071,
+        "end_tick": 385873,
+        "duration_ticks": 17802,
+        "velocity": 94
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 67,
+        "start_tick": 391814,
+        "end_tick": 394636,
+        "duration_ticks": 2822,
+        "velocity": 80
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 60,
+        "start_tick": 398824,
+        "end_tick": 401597,
+        "duration_ticks": 2773,
+        "velocity": 96
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 69,
+        "start_tick": 399242,
+        "end_tick": 401972,
+        "duration_ticks": 2730,
+        "velocity": 96
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 60,
+        "start_tick": 404918,
+        "end_tick": 407741,
+        "duration_ticks": 2823,
+        "velocity": 91
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 69,
+        "start_tick": 405520,
+        "end_tick": 408699,
+        "duration_ticks": 3179,
+        "velocity": 94
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 67,
+        "start_tick": 413028,
+        "end_tick": 416158,
+        "duration_ticks": 3130,
+        "velocity": 81
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 60,
+        "start_tick": 413121,
+        "end_tick": 416392,
+        "duration_ticks": 3271,
+        "velocity": 89
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 65,
+        "start_tick": 419215,
+        "end_tick": 422578,
+        "duration_ticks": 3363,
+        "velocity": 84
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 60,
+        "start_tick": 429263,
+        "end_tick": 483271,
+        "duration_ticks": 54008,
+        "velocity": 112
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 69,
+        "start_tick": 430210,
+        "end_tick": 483413,
+        "duration_ticks": 53203,
+        "velocity": 85
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 67,
+        "start_tick": 492237,
+        "end_tick": 509480,
+        "duration_ticks": 17243,
+        "velocity": 96
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 60,
+        "start_tick": 514627,
+        "end_tick": 518009,
+        "duration_ticks": 3382,
+        "velocity": 88
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 62,
+        "start_tick": 521699,
+        "end_tick": 524817,
+        "duration_ticks": 3118,
+        "velocity": 75
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 64,
+        "start_tick": 528352,
+        "end_tick": 531980,
+        "duration_ticks": 3628,
+        "velocity": 59
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 65,
+        "start_tick": 535719,
+        "end_tick": 538665,
+        "duration_ticks": 2946,
+        "velocity": 74
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 67,
+        "start_tick": 543485,
+        "end_tick": 546155,
+        "duration_ticks": 2670,
+        "velocity": 58
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 60,
+        "start_tick": 551505,
+        "end_tick": 602833,
+        "duration_ticks": 51328,
+        "velocity": 79
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 62,
+        "start_tick": 551689,
+        "end_tick": 556436,
+        "duration_ticks": 4747,
+        "velocity": 68
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 69,
+        "start_tick": 552076,
+        "end_tick": 604321,
+        "duration_ticks": 52245,
+        "velocity": 92
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 69,
+        "start_tick": 615051,
+        "end_tick": 634280,
+        "duration_ticks": 19229,
+        "velocity": 89
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 62,
+        "start_tick": 637225,
+        "end_tick": 640669,
+        "duration_ticks": 3444,
+        "velocity": 73
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 64,
+        "start_tick": 644094,
+        "end_tick": 646855,
+        "duration_ticks": 2761,
+        "velocity": 76
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 65,
+        "start_tick": 650809,
+        "end_tick": 653804,
+        "duration_ticks": 2995,
+        "velocity": 77
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 67,
+        "start_tick": 657911,
+        "end_tick": 660906,
+        "duration_ticks": 2995,
+        "velocity": 65
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 69,
+        "start_tick": 665605,
+        "end_tick": 668753,
+        "duration_ticks": 3148,
+        "velocity": 44
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 70,
+        "start_tick": 674490,
+        "end_tick": 724902,
+        "duration_ticks": 50412,
+        "velocity": 119
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 70,
+        "start_tick": 735368,
+        "end_tick": 754056,
+        "duration_ticks": 18688,
+        "velocity": 80
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 64,
+        "start_tick": 759344,
+        "end_tick": 763298,
+        "duration_ticks": 3954,
+        "velocity": 64
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 57,
+        "start_tick": 766570,
+        "end_tick": 788928,
+        "duration_ticks": 22358,
+        "velocity": 87
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 62,
+        "start_tick": 766896,
+        "end_tick": 788621,
+        "duration_ticks": 21725,
+        "velocity": 95
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 55,
+        "start_tick": 797396,
+        "end_tick": 818082,
+        "duration_ticks": 20686,
+        "velocity": 71
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 64,
+        "start_tick": 797986,
+        "end_tick": 818174,
+        "duration_ticks": 20188,
+        "velocity": 84
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 64,
+        "start_tick": 829851,
+        "end_tick": 854898,
+        "duration_ticks": 25047,
+        "velocity": 54
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 52,
+        "start_tick": 829913,
+        "end_tick": 854277,
+        "duration_ticks": 24364,
+        "velocity": 61
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 67,
+        "start_tick": 830086,
+        "end_tick": 856275,
+        "duration_ticks": 26189,
+        "velocity": 51
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 60,
+        "start_tick": 830288,
+        "end_tick": 855174,
+        "duration_ticks": 24886,
+        "velocity": 68
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 59,
+        "start_tick": 863937,
+        "end_tick": 919250,
+        "duration_ticks": 55313,
+        "velocity": 81
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 66,
+        "start_tick": 863999,
+        "end_tick": 919791,
+        "duration_ticks": 55792,
+        "velocity": 54
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 50,
+        "start_tick": 864029,
+        "end_tick": 920055,
+        "duration_ticks": 56026,
+        "velocity": 57
+      },
+      {
+        "track_index": 2,
+        "channel": 0,
+        "pitch": 62,
+        "start_tick": 864029,
+        "end_tick": 919637,
+        "duration_ticks": 55608,
+        "velocity": 68
+      }
+    ],
+    "total_ticks": 11105280,
+    "first_note_tick": 264,
+    "last_note_tick": 920055
+  },
+  "inferred": {
+    "provisional_title": "doremi_piano_120_4-4",
+    "tempo_summary": {
+      "initial_bpm": 120.0,
+      "tempo_change_count": 0,
+      "has_explicit_tempo": true
+    },
+    "structural_summary": {
+      "note_count": 63,
+      "time_signature_change_count": 0,
+      "track_count_with_notes": 1
+    },
+    "reconstruction_hints": {
+      "preferred_quantization": "defer",
+      "needs_manual_title_review": true,
+      "notes": [
+        "Provisional output intended for reverse-analysis iteration.",
+        "Use observed.note_events as source-of-truth extraction output."
+      ]
+    }
+  },
+  "unknown": {
+    "fields": [
+      "final_song_id",
+      "arrangement_sections",
+      "render_yaml_mapping",
+      "meta_yaml_mapping"
+    ]
+  },
+  "quality": {
+    "status": "provisional",
+    "warnings": [
+      "No advanced multi-instrument semantic inference.",
+      "No cleanup/finalize integration in this step."
+    ],
+    "lossy_points": [
+      "instrument semantics not preserved",
+      "section labels not recoverable from MIDI alone",
+      "render/meta mapping not finalized"
+    ]
+  },
+  "provenance": {
+    "generated_at_utc": "2026-04-19T04:51:56.205515Z",
+    "generator": "midi_renderer.analysis.midi_to_json",
+    "generator_version": "0.1.0",
+    "mode": "single_file_minimal"
+  }
+}
