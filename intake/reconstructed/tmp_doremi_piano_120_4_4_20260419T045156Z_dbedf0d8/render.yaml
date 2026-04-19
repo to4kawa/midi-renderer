@@ -1,5 +1,5 @@
 schema_version: '0.1'
-song_ref: neko_funjatta_test_piano_120
+song_ref: tmp_doremi_piano_120_4_4_20260419T045156Z_dbedf0d8
 format: bootstrap
 transport:
   bpm: 120.0
@@ -8,7 +8,7 @@ transport:
 tracks:
 - id: piano
   name: Piano
-  instrument: Acoustic Grand Piano
+  instrument: Piano-like (provisional)
   channel: 0
   program: 0
 notes:

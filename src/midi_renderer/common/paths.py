@@ -23,5 +23,9 @@ def intake_reconstructed_dir() -> Path:
     return intake_root() / "reconstructed"
 
 
-def reference_neko_song_dir() -> Path:
-    return repo_root() / "songs" / "neko_funjatta_test_piano_120"
+def songs_root() -> Path:
+    return repo_root() / "songs"
+
+
+def reference_song_dir(song_ref: str) -> Path:
+    return songs_root() / song_ref
