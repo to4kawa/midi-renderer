@@ -30,3 +30,22 @@ Purpose: capture structured analysis output between intake and reconstruction.
 - Early outputs are expected to be unstable.
 - Retention policy should favor append/preserve rather than overwrite/delete.
 - Actual field shape and constraints will be refined after first real outputs are produced from real MIDI inputs.
+
+## Current Provisional Schema Shape (`analysis.v0.1`)
+
+- `schema_version`: `analysis.v0.1`
+- `observed.note_events[]`
+  - `track_index` (renamed from `track`)
+  - `pitch` (renamed from `note`)
+  - `channel`, `start_tick`, `end_tick`, `duration_ticks`, `velocity`
+- `unknown`
+  - `fields: string[]` (simplified from `deferred_fields`)
+- `quality`
+  - `status`
+  - `warnings`
+  - `lossy_points` (MIDI-only reverse analysis limitations)
+- `provenance`
+  - `generated_at_utc`
+  - `generator`
+  - `generator_version`
+  - `mode`

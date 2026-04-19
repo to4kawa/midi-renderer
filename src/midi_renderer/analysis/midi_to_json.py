@@ -174,9 +174,9 @@ def _parse_track(track_bytes: bytes, track_index: int) -> tuple[list[dict], list
         end_tick = absolute_tick
         note_events.append(
             {
-                "track": track_index,
+                "track_index": track_index,
                 "channel": channel,
-                "note": first_data,
+                "pitch": first_data,
                 "start_tick": start_tick,
                 "end_tick": end_tick,
                 "duration_ticks": max(1, end_tick - start_tick),
@@ -221,7 +221,7 @@ def parse_midi_file(path: Path) -> ParsedMidi:
 
     tempo_map.sort(key=lambda item: (item["tick"], item["track"]))
     time_signatures.sort(key=lambda item: (item["tick"], item["track"]))
-    note_events.sort(key=lambda item: (item["start_tick"], item["track"], item["note"]))
+    note_events.sort(key=lambda item: (item["start_tick"], item["track_index"], item["pitch"]))
 
     first_note_tick = min((event["start_tick"] for event in note_events), default=None)
     last_note_tick = max((event["end_tick"] for event in note_events), default=None)
@@ -257,7 +257,7 @@ def _infer_fields(observed: dict, source_path: Path) -> dict:
         "structural_summary": {
             "note_count": len(observed["note_events"]),
             "time_signature_change_count": max(0, len(observed["time_signatures"]) - 1),
-            "track_count_with_notes": len({event["track"] for event in observed["note_events"]}),
+            "track_count_with_notes": len({event["track_index"] for event in observed["note_events"]}),
         },
         "reconstruction_hints": {
             "preferred_quantization": "defer",
@@ -275,7 +275,7 @@ def build_analysis_payload(midi_path: Path, repository_root: Path) -> tuple[str,
     temporary_id, analysis_id, generated_at = _build_ids(midi_path)
 
     payload = {
-        "schema_version": "0.1.0-provisional",
+        "schema_version": "analysis.v0.1",
         "analysis_id": analysis_id,
         "temporary_id": temporary_id,
         "source": {
@@ -288,7 +288,7 @@ def build_analysis_payload(midi_path: Path, repository_root: Path) -> tuple[str,
         "observed": parsed.observed,
         "inferred": _infer_fields(parsed.observed, midi_path),
         "unknown": {
-            "deferred_fields": [
+            "fields": [
                 "final_song_id",
                 "arrangement_sections",
                 "render_yaml_mapping",
@@ -301,10 +301,16 @@ def build_analysis_payload(midi_path: Path, repository_root: Path) -> tuple[str,
                 "No advanced multi-instrument semantic inference.",
                 "No cleanup/finalize integration in this step.",
             ],
+            "lossy_points": [
+                "instrument semantics not preserved",
+                "section labels not recoverable from MIDI alone",
+                "render/meta mapping not finalized",
+            ],
         },
         "provenance": {
             "generated_at_utc": generated_at,
             "generator": "midi_renderer.analysis.midi_to_json",
+            "generator_version": "0.1.0",
             "mode": "single_file_minimal",
         },
     }
